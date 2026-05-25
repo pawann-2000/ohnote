@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OhNote — Options</title>
+    <link rel="icon" type="image/png" href="../icons/icon128.png" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <header class="brand">
+        <img src="../icons/logo.png" alt="OhNote" class="logo" width="56" height="56" />
+        <div>
+          <h1>OhNote<span class="dot">.</span></h1>
+          <p class="tagline">Open notebooks anywhere.</p>
+        </div>
+      </header>
+
+      <p class="lead">
+        Right-click any Colab, GitHub <code>.ipynb</code>, raw, gist, or nbviewer link
+        and pick a platform to open the notebook in.
+      </p>
+
+      <section>
+        <h2>Direct import</h2>
+        <p class="muted">These build a launch URL straight to the platform.</p>
+        <ul id="direct" class="platforms"></ul>
+      </section>
+
+      <section>
+        <h2>Manual import</h2>
+        <p class="muted">
+          These platforms don't accept an import URL. OhNote will open their
+          create page and copy the source URL so you can paste it.
+        </p>
+        <ul id="manual" class="platforms"></ul>
+      </section>
+
+      <section>
+        <h2>Recognized inputs</h2>
+        <ul class="muted recognized">
+          <li><code>colab.research.google.com/github/USER/REPO/blob/BRANCH/PATH.ipynb</code></li>
+          <li><code>colab.research.google.com/gist/USER/GIST_ID</code></li>
+          <li><code>colab.research.google.com/drive/FILE_ID</code> <span class="hint">(Colab → Colab only)</span></li>
+          <li><code>github.com/USER/REPO/blob/BRANCH/PATH.ipynb</code></li>
+          <li><code>raw.githubusercontent.com/USER/REPO/BRANCH/PATH.ipynb</code></li>
+          <li><code>gist.github.com/USER/GIST_ID</code></li>
+          <li><code>nbviewer.org/github/...</code></li>
+          <li>Shortened links (<code>t.co</code>, <code>bit.ly</code>, <code>tinyurl.com</code>, …) pointing at any of the above</li>
+        </ul>
+      </section>
+
+      <footer>
+        <p class="status" id="status"></p>
+        <p class="version muted">OhNote · v<span id="version"></span></p>
+      </footer>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

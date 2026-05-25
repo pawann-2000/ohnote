@@ -1,0 +1,122 @@
+:root {
+  color-scheme: light;
+  --fg: #111;
+  --muted: #6b6b73;
+  --bg: #ffffff;
+  --card: #f7f7f8;
+  --border: #e6e6ea;
+  --accent: #c8f53d;
+  --accent-fg: #111;
+  --accent-ring: rgba(200, 245, 61, 0.45);
+}
+
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+  margin: 0;
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: var(--fg);
+}
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.brand .logo {
+  display: block;
+  flex: none;
+  width: 56px;
+  height: 56px;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1;
+}
+.brand .dot { color: var(--accent); }
+.brand .tagline {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+h2 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+.lead { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
+.muted { color: var(--muted); font-size: 13px; }
+.hint { font-size: 12px; }
+code {
+  font: 12.5px/1.4 ui-monospace, SF Mono, Menlo, Consolas, monospace;
+  background: var(--card);
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+section { margin-bottom: 28px; }
+.platforms {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+}
+.platforms li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-top: 1px solid var(--border);
+}
+.platforms li:first-child { border-top: none; }
+.platforms label {
+  flex: 1;
+  cursor: pointer;
+  user-select: none;
+}
+.platforms input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
+.platforms input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--accent-ring);
+  outline-offset: 2px;
+}
+
+.recognized {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+.recognized li {
+  padding: 4px 0;
+  word-break: break-all;
+}
+
+footer {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.status {
+  font-size: 13px;
+  color: var(--muted);
+  min-height: 18px;
+  margin: 0;
+}
+.version { margin: 0; }

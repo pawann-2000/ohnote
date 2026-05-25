@@ -1,0 +1,11 @@
+{
+  "name": "ohnote-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension for opening notebooks anywhere",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "package": "rm -f ohnote.zip && zip -r ohnote.zip manifest.json background icons lib options pages -x '*.DS_Store'"
+  }
+}
