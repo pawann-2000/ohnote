@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "OhNote — Open notebooks anywhere",
   "version": "0.0.1",
-  "description": "Right-click a Colab or GitHub .ipynb link to open it in Kaggle, Deepnote, SageMaker Studio Lab, Binder, vscode.dev, and more. Follows short links natively.",
+  "description": "Right-click any Colab or GitHub .ipynb link to open it in Kaggle, Deepnote, SageMaker, Binder, vscode.dev, and more.",
   "author": "OhNote",
   "homepage_url": "https://github.com/",
   "minimum_chrome_version": "114",
