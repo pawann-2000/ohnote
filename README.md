@@ -1,5 +1,12 @@
 # OhNote — Open notebooks anywhere
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="media/ohnote-dark.gif" />
+    <img src="media/ohnote.gif" alt="OhNote — open any notebook link in any platform" width="440" />
+  </picture>
+</p>
+
 A Chrome extension. Right-click any Colab, GitHub `.ipynb`, raw, gist, or
 nbviewer link and pick a platform to open the notebook in.
 
