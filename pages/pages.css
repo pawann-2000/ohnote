@@ -107,3 +107,34 @@ button:focus-visible, a.primary:focus-visible {
   color: var(--muted);
   min-height: 18px;
 }
+
+.group { margin-top: 24px; }
+.group h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+.platform-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.platform-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.platform-name { font-weight: 500; }
+.platform-row a.primary { padding: 6px 12px; font-size: 13px; }
+.footer-link { margin-top: 28px; }
+.footer-link a { color: var(--fg); }

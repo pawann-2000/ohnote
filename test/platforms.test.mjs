@@ -7,6 +7,9 @@ const ghInfo = parseNotebookUrl(
   "https://github.com/foo/bar/blob/main/notebooks/demo.ipynb"
 );
 const gistInfo = parseNotebookUrl("https://gist.github.com/alice/abc123");
+const hfInfo = parseNotebookUrl(
+  "https://huggingface.co/foo/bar/blob/main/notebooks/demo.ipynb"
+);
 const driveInfo = parseNotebookUrl(
   "https://colab.research.google.com/drive/DRIVE_ID"
 );
@@ -94,6 +97,40 @@ describe("PLATFORMS — direct builders", () => {
       find("githubraw").build(ghInfo, ""),
       "https://raw.githubusercontent.com/foo/bar/main/notebooks/demo.ipynb"
     );
+  });
+});
+
+describe("PLATFORMS — Hugging Face source", () => {
+  test("Kaggle uses HF resolve target", () => {
+    const url = find("kaggle").build(hfInfo, "https://huggingface.co/foo/bar/blob/main/notebooks/demo.ipynb");
+    assert.match(decodeURIComponent(url), /huggingface\.co\/foo\/bar\/resolve\/main\/notebooks\/demo\.ipynb/);
+  });
+
+  test("Deepnote uses HF resolve target", () => {
+    const url = find("deepnote").build(hfInfo, "");
+    assert.match(decodeURIComponent(url), /huggingface\.co\/foo\/bar\/resolve\/main/);
+  });
+
+  test("nbviewer renders HF via /urls/", () => {
+    assert.equal(
+      find("nbviewer").build(hfInfo, ""),
+      "https://nbviewer.org/urls/huggingface.co/foo/bar/resolve/main/notebooks/demo.ipynb"
+    );
+  });
+
+  test("raw download resolves HF URL", () => {
+    assert.equal(
+      find("githubraw").build(hfInfo, ""),
+      "https://huggingface.co/foo/bar/resolve/main/notebooks/demo.ipynb"
+    );
+  });
+
+  test("Colab cannot open HF (null → unsupported)", () => {
+    assert.equal(find("colab").build(hfInfo, ""), null);
+  });
+
+  test("SageMaker cannot open HF", () => {
+    assert.equal(find("sagemaker").build(hfInfo, ""), null);
   });
 });
 

@@ -58,6 +58,11 @@ the context-menu's `targetUrlPatterns` in `background/service-worker.js`.
 - `raw.githubusercontent.com/USER/REPO/BRANCH/PATH.ipynb`
 - `gist.github.com/USER/GIST_ID`
 - `nbviewer.org/github/...`
+- `huggingface.co/USER/REPO/blob/BRANCH/PATH.ipynb` (also `/datasets/…`, `/spaces/…`, and `/resolve/` `/raw/` views)
+
+Hugging Face notebooks open in Kaggle, Deepnote, nbviewer, or as raw `.ipynb`.
+Colab, SageMaker, github.dev, vscode.dev, and Binder are GitHub-only and route
+to the "unsupported" page for a Hugging Face source.
 
 Google Drive Colab notebooks can only be opened back in Colab — Kaggle,
 Deepnote, SageMaker, etc. need a public GitHub URL.

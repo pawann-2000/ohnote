@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OhNote — Open notebook in…</title>
+    <link rel="icon" type="image/png" href="../icons/icon128.png" />
+    <link rel="stylesheet" href="pages.css" />
+  </head>
+  <body>
+    <main>
+      <div class="brand">
+        <img src="../icons/logo.png" alt="" class="logo" width="32" height="32" />
+        <div class="name">OhNote<span class="dot">.</span></div>
+      </div>
+
+      <h1>Open this notebook in…</h1>
+      <p class="lead" id="lead">Paste a notebook URL, then pick a platform.</p>
+
+      <label class="field">
+        <span>Notebook URL</span>
+        <div class="copy-row">
+          <input id="url" type="text" placeholder="https://github.com/USER/REPO/blob/BRANCH/file.ipynb" />
+          <button id="paste" type="button">Paste</button>
+        </div>
+      </label>
+
+      <section class="group" id="directGroup" hidden>
+        <h2>Direct import</h2>
+        <ul class="platform-list" id="directList"></ul>
+      </section>
+
+      <section class="group" id="manualGroup" hidden>
+        <h2>Manual import</h2>
+        <ul class="platform-list" id="manualList"></ul>
+      </section>
+
+      <section class="group" id="unavailableGroup" hidden>
+        <h2 class="muted">Not available for this URL</h2>
+        <ul class="platform-list" id="unavailableList"></ul>
+      </section>
+
+      <p class="status" id="status"></p>
+
+      <p class="muted footer-link">
+        Manage which platforms appear here on the
+        <a id="optionsLink" href="#">Options page</a>.
+      </p>
+    </main>
+    <script type="module" src="picker.js"></script>
+  </body>
+</html>

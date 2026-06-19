@@ -18,6 +18,12 @@ const DIRECT_PATTERNS = [
   "*://nbviewer.org/gist/*",
   "*://nbviewer.jupyter.org/github/*",
   "*://nbviewer.jupyter.org/gist/*",
+  "*://huggingface.co/*/blob/*.ipynb",
+  "*://huggingface.co/*/blob/*.ipynb?*",
+  "*://huggingface.co/*/resolve/*.ipynb",
+  "*://huggingface.co/*/resolve/*.ipynb?*",
+  "*://huggingface.co/*/raw/*.ipynb",
+  "*://huggingface.co/*/raw/*.ipynb?*",
 ];
 
 const SHORT_PATTERNS = [...SHORTENERS].map((h) => `*://${h}/*`);
@@ -87,8 +93,13 @@ chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "sync" && changes.enabledPlatforms) rebuildMenus();
 });
 
-chrome.action.onClicked.addListener(() => {
-  chrome.runtime.openOptionsPage();
+chrome.action.onClicked.addListener((tab) => {
+  const params = new URLSearchParams();
+  const candidate = tab?.url ?? "";
+  if (candidate && parseNotebookUrl(candidate)) params.set("url", candidate);
+  const qs = params.toString();
+  const url = chrome.runtime.getURL("pages/picker.html") + (qs ? "?" + qs : "");
+  chrome.tabs.create({ url, index: (tab?.index ?? -1) + 1 });
 });
 
 // ---------- Target planning ----------

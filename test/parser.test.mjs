@@ -1,6 +1,6 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
-import { parseNotebookUrl, toGitHubBlobUrl, toRawGitHubUrl, encodePath } from "../lib/parser.js";
+import { parseNotebookUrl, toGitHubBlobUrl, toRawGitHubUrl, toRawUrl, encodePath } from "../lib/parser.js";
 
 describe("parseNotebookUrl — Colab", () => {
   test("colab /github URL → github descriptor", () => {
@@ -76,6 +76,82 @@ describe("parseNotebookUrl — gist and nbviewer", () => {
       branch: "main",
       path: "x.ipynb",
     });
+  });
+});
+
+describe("parseNotebookUrl — Hugging Face", () => {
+  test("model blob .ipynb", () => {
+    const got = parseNotebookUrl(
+      "https://huggingface.co/foo/bar/blob/main/notebooks/demo.ipynb"
+    );
+    assert.deepEqual(got, {
+      source: "huggingface",
+      repoType: "model",
+      user: "foo",
+      repo: "bar",
+      branch: "main",
+      path: "notebooks/demo.ipynb",
+    });
+  });
+
+  test("dataset resolve .ipynb", () => {
+    const got = parseNotebookUrl(
+      "https://huggingface.co/datasets/foo/bar/resolve/main/x.ipynb"
+    );
+    assert.deepEqual(got, {
+      source: "huggingface",
+      repoType: "dataset",
+      user: "foo",
+      repo: "bar",
+      branch: "main",
+      path: "x.ipynb",
+    });
+  });
+
+  test("space raw .ipynb", () => {
+    const got = parseNotebookUrl(
+      "https://huggingface.co/spaces/foo/bar/raw/main/x.ipynb"
+    );
+    assert.deepEqual(got, {
+      source: "huggingface",
+      repoType: "space",
+      user: "foo",
+      repo: "bar",
+      branch: "main",
+      path: "x.ipynb",
+    });
+  });
+
+  test("non-ipynb HF file returns null", () => {
+    assert.equal(
+      parseNotebookUrl("https://huggingface.co/foo/bar/blob/main/config.json"),
+      null
+    );
+  });
+
+  test("HF model page (no file) returns null", () => {
+    assert.equal(parseNotebookUrl("https://huggingface.co/foo/bar"), null);
+  });
+});
+
+describe("toHuggingFaceRawUrl / toRawUrl", () => {
+  test("model resolve URL", () => {
+    const info = parseNotebookUrl("https://huggingface.co/foo/bar/blob/main/x y.ipynb");
+    assert.equal(
+      toRawUrl(info),
+      "https://huggingface.co/foo/bar/resolve/main/x%20y.ipynb"
+    );
+  });
+  test("dataset resolve URL carries the datasets/ prefix", () => {
+    const info = parseNotebookUrl("https://huggingface.co/datasets/foo/bar/blob/main/x.ipynb");
+    assert.equal(
+      toRawUrl(info),
+      "https://huggingface.co/datasets/foo/bar/resolve/main/x.ipynb"
+    );
+  });
+  test("toRawUrl still handles github", () => {
+    const info = parseNotebookUrl("https://github.com/foo/bar/blob/main/x.ipynb");
+    assert.equal(toRawUrl(info), "https://raw.githubusercontent.com/foo/bar/main/x.ipynb");
   });
 });
 
